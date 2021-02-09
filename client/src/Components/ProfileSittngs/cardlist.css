@@ -1,0 +1,9 @@
+.user__places{
+  border: solid 2px rgb(226, 226, 226);
+  
+  margin-top: 10px;
+}
+.user__places h3{
+  color: #FF5A5F;
+}
+
