@@ -11,20 +11,24 @@ import GoogleLogin from "react-google-login";
 import { AuthContext } from "../../Context/AuthContext";
 import { SignUpModale } from "../signup/SignUpModale";
 
-const Login = props => {
+
+
+interface Event{
+  target:HTMLInputElement,
+}
+
+const Login:React.FC= (props) => {
   //bootstrap modale for signup
   const [modalShow, setModalShow] = React.useState(false);
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
   const authContext = useContext(AuthContext);
   const { login } = authContext;
-
   const [user, setUser] = useState({});
 
-  const handleChange = e => {
-    const { name, value } = e.target;
+  //changeHandler
+  const handleChange= (e:Event) => {
+    const { name, value } = e?.target ;
     setUser({
       ...user,
       [name]: value,
@@ -34,17 +38,11 @@ const Login = props => {
   const history = useHistory();
 
   const handleSubmit = () => {
-    const config = {
-      header: {
-        "Content-Type": "application/json",
-      },
-    };
     setLoading(true);
 
     axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, user, config)
+      .post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, user)
       .then(res => {
-        // console.log(res);
         const user = res.data;
         const { token, userId, isHost } = user;
         login(userId, token, isHost);
@@ -58,13 +56,11 @@ const Login = props => {
       });
   };
 
-  const onSubmitHandler = dataForm => {};
-
-  const responseGoogleHandler = response => {
+  const responseGoogleHandler = (response:any) => {
     setLoading(true);
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/google`, {
-        tokenId: response.tokenId,
+        tokenId: response.tokenId
       })
       .then(res => {
         // console.log(res.data);
@@ -81,8 +77,7 @@ const Login = props => {
         setError(err.response.data.message);
       });
   };
-  const errorGoogleHandler = error => {};
-
+  const errorGoogleHandler = (error:string) => {console.warn(error)};
   return (
     <div className="Login-card ">
       <Modal
@@ -195,7 +190,6 @@ const Login = props => {
               render={renderProps => (
                 <div
                   onClick={renderProps.onClick}
-                  disabled={renderProps.disabled}
                   className="social-login__btn "
                 >
                   <div className="google-container">
@@ -236,18 +230,14 @@ const Login = props => {
               <Link
                 to=""
                 className="ml-1 font-weight-bold"
-                variant="primary"
-                onClick={props.onHide}
+                // onClick={props.onHide}
                 onClick={() => {
                   setModalShow(true);
                 }}
               >
                 Sign up
               </Link>
-              <SignUpModale
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-              />
+              <SignUpModale/>
             </div>
           </div>
         </Modal.Body>

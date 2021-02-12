@@ -4,8 +4,6 @@ import DehazeIcon from "@material-ui/icons/Dehaze";
 import { Link } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Login from "../../../Components/Login/Login";
-// import { Dropdown } from "reactstrap";
-
 import { AuthContext } from "../../../Context/AuthContext";
 import { SignUpModale } from "../../../Components/signup/SignUpModale";
 
@@ -37,7 +35,6 @@ function HeaderRight() {
                 <li
                   role="button"
                   className="py-1"
-                  variant="primary"
                   onClick={() => setModalShow_2(true)}
                 >
                   Login
@@ -48,7 +45,6 @@ function HeaderRight() {
                 <li
                   role="button"
                   className="py-1"
-                  variant="primary"
                   onClick={() => setModalShow(true)}
                 >
                   Signup

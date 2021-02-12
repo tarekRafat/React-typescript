@@ -40,8 +40,7 @@ export const SignUpModale: React.FC = (props) => {
 
     const pickedDate = new Date(dataForm.date).getFullYear();
     const validDate = new Date("2002-01-01").getFullYear();
-    // console.log(pickedDate);
-    // console.log(validDate);
+
     if (pickedDate > validDate) {
       return setValidDate(true);
     }
