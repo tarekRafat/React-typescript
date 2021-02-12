@@ -3,14 +3,14 @@ import LanguageIcon from "@material-ui/icons/Language";
 import DehazeIcon from "@material-ui/icons/Dehaze";
 import { Link } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import Login from "../../../Components/Login/Login";
 import { AuthContext } from "../../../Context/AuthContext";
 import { SignUpModale } from "../../../Components/signup/SignUpModale";
+import Login from "../../../Components/Login/Login";
 
-function HeaderRight() {
+const HeaderRight:React.FC =()=> {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [modalShow, setModalShow] = useState(false);
-  const [modalShow_2, setModalShow_2] = useState(false);
+  const [signupModal, setSignupModal] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
   const authContext = useContext(AuthContext);
   const { logout, token } = authContext;
 
@@ -35,25 +35,23 @@ function HeaderRight() {
                 <li
                   role="button"
                   className="py-1"
-                  onClick={() => setModalShow_2(true)}
+                  onClick={() => setLoginModal(true)}
                 >
                   Login
                 </li>
               )}
-              <Login show={modalShow_2} onHide={() => setModalShow_2(false)} />
+              <Login show={loginModal}  onHide ={()=>setLoginModal(false)}/>
               {!token && (
                 <li
                   role="button"
                   className="py-1"
-                  onClick={() => setModalShow(true)}
+                  onClick={() => setSignupModal(true)}
                 >
                   Signup
                 </li>
               )}
               <SignUpModale
-                role="button"
-                show={modalShow}
-                onHide={() => setModalShow(false)}
+              show={signupModal} onHide={()=>setSignupModal(false)}
               />
 
               {token && (

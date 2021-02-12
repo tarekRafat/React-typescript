@@ -5,9 +5,9 @@ import { useHistory, Link } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import "../Login/login.css";
 import { FaFacebookSquare, FaApple } from "react-icons/fa";
+import { ImCross } from "react-icons/im";
 import { FcGoogle, FcInvite } from "react-icons/fc";
 import GoogleLogin from "react-google-login";
-
 import { AuthContext } from "../../Context/AuthContext";
 import { SignUpModale } from "../signup/SignUpModale";
 
@@ -16,10 +16,13 @@ import { SignUpModale } from "../signup/SignUpModale";
 interface Event{
   target:HTMLInputElement,
 }
-
-const Login:React.FC= (props) => {
+interface LoginProps{
+  show:boolean,
+  onHide:()=>void,
+}
+const Login:React.FC<LoginProps>= (props) => {
   //bootstrap modale for signup
-  const [modalShow, setModalShow] = React.useState(false);
+  // const [modalShow, setModalShow] = React.useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const authContext = useContext(AuthContext);
@@ -88,12 +91,10 @@ const Login:React.FC= (props) => {
       >
         {" "}
         <Modal.Body className="text-center">
-          <div className="header row">
-            <i
-              className="fas fa-times mt-2 mr-2 col-2"
-              style={{ cursor: "pointer" }}
-            />
-            <span className="col-8"> log in</span>
+          <div className="header row login_modal_header">
+            <span className=""> log in</span>
+            {/* <i className="fas fa-times-circle" ></i> */}
+            <ImCross onClick={props.onHide} className="imcross-icon"/>
           </div>
           <hr />
           {error && (
@@ -228,16 +229,16 @@ const Login:React.FC= (props) => {
             <div className="row mt-2">
               <p className="ml-3">Don't have an account</p>
               <Link
-                to=""
+               to=""
                 className="ml-1 font-weight-bold"
-                // onClick={props.onHide}
-                onClick={() => {
-                  setModalShow(true);
-                }}
+                // onClick={() => setModal(true)}
+                // onClick={() => {
+                //   setModalShow(true);
+                // }}
               >
                 Sign up
               </Link>
-              <SignUpModale/>
+              <SignUpModale show={props.show} onHide={props.onHide}/>
             </div>
           </div>
         </Modal.Body>

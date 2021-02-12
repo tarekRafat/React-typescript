@@ -21,6 +21,21 @@
   text-align: center;
   text-transform: capitalize;
 }
+.login_modal_header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.imcross-icon {
+  cursor: pointer;
+  position: absolute;
+  top: 2rem;
+  right: 2.5rem;
+}
+.imcross-icon:hover {
+  color: rgb(230, 30, 77);
+}
 hr {
   color: black;
 }

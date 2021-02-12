@@ -6,6 +6,7 @@ import { useHistory, useRouteMatch } from "react-router-dom";
 import "./Signup.css";
 import { Modal } from "react-bootstrap";
 import { AuthContext } from "../../Context/AuthContext";
+import { ImCross } from "react-icons/im";
 
 type Inputs = {
   firstName: string;
@@ -14,8 +15,12 @@ type Inputs = {
   email: string;
   password: string;
 };
+type SignUpProps = {
+  show:boolean,
+  onHide:()=>void,
+}
 
-export const SignUpModale: React.FC = (props) => {
+export const SignUpModale: React.FC<SignUpProps> = (props) => {
   const authContext = useContext(AuthContext);
   const { login } = authContext;
   const [loading, setLoading] = useState(false);
@@ -105,7 +110,8 @@ export const SignUpModale: React.FC = (props) => {
         <Modal.Body style={{ borderRadius: "2rem" }}>
           <div className="signup-container">
             <div className="finish-signup">
-              <h5 className="text-center">Finish signing up</h5>
+              <h3 className="text-center">Sign Up</h3>
+            <ImCross onClick={props.onHide} className="imcross-icon-signup"/>
             </div>
             <form onSubmit={handleSubmit(onSubmitHandler)}>
               <div className="full-name">
