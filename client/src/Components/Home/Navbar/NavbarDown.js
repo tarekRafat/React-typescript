@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthContext";
 import Login from "../../Login/Login";
 import { SignUpModale } from "../../signup/SignUpModale";
+
 function NavbarDown() {
   const [modalShow, setModalShow] = useState(false);
   const [modalShow_2, setModalShow_2] = useState(false);

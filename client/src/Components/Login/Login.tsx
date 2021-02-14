@@ -13,7 +13,7 @@ import { SignUpModale } from "../signup/SignUpModale";
 
 
 
-interface Event{
+export interface Event{
   target:HTMLInputElement,
 }
 interface LoginProps{

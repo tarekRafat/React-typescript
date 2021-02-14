@@ -10,16 +10,6 @@ const Header = props => {
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
 
-  // useEffect(() => {
-  //   document.addEventListener("scroll", () => {
-  //     const top = window.scrollY < 100;
-
-  //     if (top !== isTop) {
-  //       setIsTop(top);
-  //     }
-  //   });
-  // }, [isTop]);
-
   const showdate = search => {
     setShowSearch(search);
   };

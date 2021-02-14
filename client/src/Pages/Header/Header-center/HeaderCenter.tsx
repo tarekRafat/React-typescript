@@ -1,29 +1,42 @@
 import React, { useState } from 'react';
 import {  Alert } from "react-bootstrap";
 import SearchIcon from '@material-ui/icons/Search';
-import { withRouter, useRouteMatch } from 'react-router-dom';
+import { withRouter, useRouteMatch,RouteComponentProps } from 'react-router-dom';
+import {Event} from '../../../Components/Login/Login'
+import { RiSdCardFill } from 'react-icons/ri';
+// interface HeaderProps{
 
-const HeaderCenter = props => {
-  const [error, setError] = useState(null);
+//   history:{push:(argument:string)=>void},
+// }
+interface HomeProps extends RouteComponentProps<any> {
+  show:(showSearch:boolean)=>void,
+  onSearch:(location:string,guests:string)=>void,
+  startValue:string,
+  endValue:string,
+}
+  const HeaderCenter:React.FC<HomeProps> = (props) => {
+  console.log(props)
+  const [error, setError] = useState('');
 	const [showSearch, setShowSearch] = useState(false);
 	const [location, setLocation] = useState('');
 	const [guests, setGuests] = useState('');
 	const [date, setDate] = useState({ startValue: '', endValue: '' });
-
 	const route = useRouteMatch();
+  
 
 	const clickHandler = () => {
 		setShowSearch(!showSearch);
 		props.show(!showSearch);
 		// console.log(showSearch);
 	};
-	const locationHandler = e => {
+ 
+	const locationHandler = (e:Event) => {
 		setLocation(e.target.value);
 	};
-	const guestsHandler = e => {
+	const guestsHandler = (e:Event) => {
 		setGuests(e.target.value);
 	};
-	const dateHandler = e => {
+	const dateHandler = (e:Event) => {
 		const name = e.target.name;
 		setDate({
 			...date,
@@ -51,7 +64,7 @@ const HeaderCenter = props => {
     <>
       <div className="header2__center ">
         {error && (
-          <Alert variant="danger" onClose={() => setError(null)} dismissible>
+          <Alert variant="danger" onClose={() => setError('')} dismissible>
             <Alert.Heading>{error}</Alert.Heading>
           </Alert>
         )}
